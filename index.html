@@ -22,14 +22,10 @@
               </select>
             </div>
           </div>
+	  <p id="demo"></p>
           <div class="input-field second-wrap">
-            <input id="search" type="text" placeholder="Find Music" />
+            <input id="search" type="text" placeholder="Find Music"/>
           </div>
-	  <script type = "text/javascript">
-	    document.getElementById("search").on = function{
-	    	location.href="results.html";
-	    };
-	  </script>
           <div class="input-field third-wrap">
             <button id="search_button" class="btn-search" type="button" style="background-color: #2D2045">
 		<svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -38,7 +34,9 @@
             </button>
 	    <script type="text/javascript">
 	    	document.getElementById("search_button").onclick = function() {
-		  location.href = "results.html";
+		  var input = document.getElementById("search").value;
+		  url = "results.html?name=" + encodeURIComponent(input);
+		  document.location.href = url;
 		};
 	    </script>
           </div>
