@@ -1,5 +1,6 @@
 <html>
   <head>
+    <script language="javascript" type="text/javascript" src="/bower_components/spotify-web-api-js/src/spotify-web-api.js"></script>
     <p id='here'>test</p>
     <script>
 	    window.onload = function() {
@@ -11,6 +12,7 @@
 			data[tmp[0]] = tmp[1];
 		}
 		document.getElementById('here').innerHTML = data.name;
+		//data.name now holds the text field that the user entered. I will now try to print onto the screen the results of getArtistAlbums
 	    }
     </script>
   </head>
