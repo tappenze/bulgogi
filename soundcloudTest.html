@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Include SDK - Using SoundCloud API</title>
+
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+    <script>
+        SC.initialize({
+            client_id: '3UT1QkKC2kBqMLmSnbLbIps1suqeSlRs',
+        });
+        console.log("got here");
+        SC.stream("/tracks/293").then(function(sound){
+            sound.play();
+        });
+        </script>
+    <button onclick="myFunc()">Click me</button>
+    <script>
+        function myFunc(){
+            SC.stream('/tracks/293', { autoPlay: true }).then(function(player){
+                player.play().then(function(){
+                    console.log('Playback started!');
+                }).catch(function(e){
+                    console.error('Playback rejected. Try calling play() from a user interaction.', e);
+                });
+            });
+        }
+    </script>
+</head>
+<body></body>
+</html>
