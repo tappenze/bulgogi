@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    const params = this.getHashParams();
+    this.state ={
+      loggedIn: params.access_token ? true : false,
+      nowPlaying: {
+        name: 'Not Checked',
+        image: ''
+      }
+    }
+  }
+  getHashParams() {
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    while ( e = r.exec(q)) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <a href='http://localhost:8888'>
+          <button>Login with Spotify</button>
+        </a>
+        <div>Now Playing { this.state.nowPlaying.name } </div>
+        <div>
+          <img src={ this.state.nowPlaying.image } style={ {width: 100} }/>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
