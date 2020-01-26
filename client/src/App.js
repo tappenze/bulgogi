@@ -28,6 +28,22 @@ class App extends Component {
       }
     };
   }
+  parseUrl() {
+    var url = document.location.href,
+        params = url.split("?")[1].split("&"),
+        data = {},
+        tmp;
+    for (var i = 0; i < params.length; i++) {
+      tmp = params[i].split("=");
+      data[tmp[0]] = tmp[1];
+    }
+    document.getElementById("Overall").innerHTML = data.name;
+    var str = data.name;
+    var search_type = str.slice(0, str.indexOf("/"));
+    var search_contents = str.slice(str.indexOf("/") + 1, str.length);
+    document.getElementById("type").innerHTML = search_type;
+    document.getElementById("contents").innerHTML = search_contents;
+  }
   getHashParams() {
     var hashParams = {};
     var e,
@@ -83,22 +99,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <script>
-          var url = document.location.href,
-          params = url.split("?")[1].split("&"),
-          data = {},
-          tmp;
-          for (var i = 0, l = params.length; i < l; i++) {
-            tmp = params[i].split("=");
-            data[tmp[0]] = tmp[1];
-          }
-          document.getElementById("Overall").innerHTML = data.name;
-          var str = data.name;
-          var search_type = str.slice(0, str.indexOf("/"));
-          var search_contents = str.slice(str.indexOf("/") + 1, str.length);
-          document.getElementById("type").innerHTML = search_type;
-          document.getElementById("contents").innerHTML = search_contents;
-        </script>
         <a href="http://localhost:8888"> Login to Spotify </a>
         <div>
           Song 1: {this.state.songs.name1} By {this.state.songs.artist1}
