@@ -79,6 +79,40 @@
         itemSelectText: ""
       });
     </script>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+    <script>
+      SC.initialize({
+        client_id: '3UT1QkKC2kBqMLmSnbLbIps1suqeSlRs',
+      });
+      console.log("got here");
+
+    </script>
+    <script async>
+      async function search(song) {
+        const tracks = await SC.get('/tracks', {
+          q: song
+        });
+        return tracks[0].id;
+      }
+
+      async function createPlayer(song) {
+
+        if (document.getElementById("player") != undefined) {
+          let removeMe = document.getElementById(("player"));
+          removeMe.parentNode.removeChild(removeMe);
+        }
+
+        const urlA = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/";
+        const trackID = await search(song);
+        const urlB = "?autoplay=true";
+        var ifrm = document.createElement("iframe");
+        ifrm.setAttribute("src", urlA + trackID + urlB);
+        ifrm.style.width = "100%";
+        ifrm.style.height = "100%";
+        document.body.appendChild(ifrm);
+        ifrm.id = "player";
+      }
+    </script>
   </body>
   <!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
